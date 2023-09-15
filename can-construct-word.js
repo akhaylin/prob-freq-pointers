@@ -2,39 +2,36 @@
 /**takes string
  * returns object which maps frequency of letters of the string
   */
-function getFrequencyCounter(items){
+function getFrequencyCounter(items) {
   const freqs = {};
-  for(const item of items){
-    let curr = freqs[item] || 0;
-    curr = curr +1;
 
+  for (const item of items) {
+    freqs[item] = (freqs[item] || 0) + 1;
   }
+
   return freqs;
 }
+
 /**Takes a word and a sring of letters
  * Determines weather the word can be constructed using the string of letters
  * returns true if word can be constructed, false otherwise
  */
-function canConstructWord(word, letters){
-  if(letters.length === 0) return false;
-  if(word.length === 0) return true;
+function canConstructWord(word, letters) {
+  if (!letters.length) return false;
+  if (word.length === 0) return true;
 
-  const freqs1 = getFrequencyCounter(word)
-  const freqs2 = getFrequencyCounter(letters)
+  const wordFreq = getFrequencyCounter(word);
+  const letterFreq = getFrequencyCounter(letters);
 
-  for(let letter in freqs2){
+  for (let char in wordFreq) {
+    const value = letterFreq[char] || 0;
+    if (wordFreq[char] > value) {
 
-    if(freqs1[letter] >= freqs2[letter] || freqs2[letter] !== true){
       return false;
     }
   }
 
   return true;
 }
-//make frequency counter for word and letters
-//check if letters string is empty; return false
-//check if words string is empty; return true
-//get frequencies object for word and letters
-
 
 
